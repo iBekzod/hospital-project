@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\ErrorResource;
+use App\Models\Error;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -17,5 +19,10 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('login');
         }
+    }
+
+    protected function unauthenticated($request, array $guards)
+    {
+        return new ErrorResource(Error::where('status', 401)->first());
     }
 }
