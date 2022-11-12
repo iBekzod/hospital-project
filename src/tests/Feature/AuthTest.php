@@ -12,7 +12,7 @@ class AuthTest extends TestCase
 {
     public function testRegister()
     {
-        $response = $this->json('POST', '/api/register', [
+        $response = $this->json('POST', 'api/register', [
             'name'  =>  $name = 'Test',
             'email'  =>  $email = time().'test@example.com',
             'password'  =>  $password = '123456789',
@@ -22,7 +22,6 @@ class AuthTest extends TestCase
         Log::info(1, [$response->getContent()]);
 
         $response->assertStatus(200);
-
         // Receive our token
         $this->assertArrayHasKey('access_token',$response->json());
 
@@ -38,7 +37,7 @@ class AuthTest extends TestCase
         ]);
 
         // Simulated landing
-        $response = $this->json('POST','/api/login',[
+        $response = $this->json('POST','api/login',[
             'email' => $email,
             'password' => $password,
         ]);

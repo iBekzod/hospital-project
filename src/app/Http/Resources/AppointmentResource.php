@@ -21,7 +21,7 @@ class AppointmentResource extends JsonResource
         foreach($participants as $participant){
             $participant_data[]=['actor'=>['reference'=>$participant]];
         }
-        $performer_data=['performer'=>['reference'=>$this->performer]];
+        $performer_data=['reference'=>$this->performer];
         return [
             'id'=>$this->id,
             'identifier'=>new IdentifierResource($this->identifierRelation),

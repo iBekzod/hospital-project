@@ -10,39 +10,64 @@ use Carbon\Carbon;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends BaseController
 {
 
     public function register(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:6'
         ]);
-        $user = new User([
+        if($validator->fails()){
+            return $this->failure(401);;
+        }
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
-        $user->save();
-        $tokenResult = $user->createToken('Personal Access Token');
-        return $this->loginSuccess($tokenResult, $user);
+
+        $accessToken = $user->createToken('authToken')->accessToken;
+
+        return response()->json([ 'user' => $user, 'access_token' => $accessToken], 200);
+        // $user = new User([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => bcrypt($request->password),
+        //     'unique_id'=>Str::uuid()->toString()
+        // ]);
+        // $user->save();
+        // $token = $user->createToken('Personal Access Token')->accessToken;
+        // return $this->loginSuccess($token, $user);
     }
 
     public function login(Request $request)
     {
-        $request->validate([
+        $data = $request->all();
+        $validator = Validator::make($data, [
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
-        if (!Auth::attempt(request(['email', 'password'])))
+        if($validator->fails()){
+            return $this->failure(401);;
+        }
+        if (!auth()->attempt($data)) {
             return $this->failure(401);
+        }
+
+        $token = auth()->user()->createToken('authToken')->accessToken;
+        // if (!Auth::guard('api')->setUser(request(['email', 'password'])))
+        //     return $this->failure(401);
 
         $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        return $this->loginSuccess($tokenResult, $user);
+        // $token = $user->createToken('Personal Access Token')->accessToken;
+        return $this->loginSuccess($token, $user);
     }
 
     public function user(Request $request)
@@ -55,17 +80,11 @@ class AuthController extends BaseController
         $request->user()->token()->revoke();
         return $this->success('Successfully logged out');
     }
-    protected function loginSuccess($tokenResult, $user)
+    protected function loginSuccess($token, $user)
     {
-        $token = $tokenResult->token;
-        $token->expires_at = Carbon::now()->addMonth();
-        $token->save();
         return $this->success('Successfully logged in!', [
-            'access_token' => $tokenResult->accessToken,
+            'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString(),
             'user' => $user,
         ]);
     }

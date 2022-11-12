@@ -20,19 +20,19 @@ class AppointmentController extends BaseController
      */
     public function index(Request $request)
     {
-        try {
-            $appointments=Appointment::query();
+        // try {
+            $appointments=Appointment::get();
             if($participant=$request->participant){
                 $appointments=$appointments->where('participant', 'like', '%'.$participant.'%');
             }
             if($performer=$request->performer){
                 $appointments=$appointments->where('performer', 'like', '%'.$performer.'%');
             }
-            $appointments=$appointments->get();
+            // $appointments=$appointments->get();
             return AppointmentResource::collection($appointments);
-        } catch (\Throwable $th) {
-            return $this->failure(502);
-        }
+        // } catch (\Throwable $th) {
+        //     return $this->failure(502);
+        // }
     }
 
     /**

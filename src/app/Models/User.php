@@ -13,8 +13,8 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use UUID;
-    protected $primaryKey = 'unique_id';
+    // use UUID;
+    // protected $primaryKey = 'unique_id';
     /**
      * The attributes that are mass assignable.
      *
