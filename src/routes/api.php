@@ -16,15 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('Appointment', [AppointmentController::class, 'index']);
+Route::get('users', [AppointmentController::class, 'users']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user', [AuthController::class, 'user']);
-    Route::post('Appointment', [AppointmentController::class, 'create']);
-    // Route::get('Appointment', [AppointmentController::class, 'index']);
+    Route::post('Appointment', [AppointmentController::class, 'store']);
+    Route::get('Appointment', [AppointmentController::class, 'index']);
     Route::get('Appointment/{appointment}', [AppointmentController::class, 'show']);
     Route::patch('Appointment/{appointment}', [AppointmentController::class, 'update']);
 });

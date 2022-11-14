@@ -48,7 +48,7 @@ class AuthTest extends TestCase
         // Determine whether the login is successful and receive token
         $response->assertStatus(200);
 
-        //$this->assertArrayHasKey('token',$response->json());
+        $this->assertArrayHasKey('access_token',$response->json());
 
         // Delete users
         User::where('email','test@gmail.com')->delete();

@@ -16,12 +16,12 @@ class BaseController extends Controller
             'data'      => $data
         ], $status);
     }
-    
-    public function failure(int $status=200){
+
+    public function failure(int $status=500){
         if($error=Error::where('status', $status)->first()){
             new ErrorResource($error);
         }else{
-            abort('Error status not found', 404);
+            abort(404, 'Error status not found');
         }
     }
 }

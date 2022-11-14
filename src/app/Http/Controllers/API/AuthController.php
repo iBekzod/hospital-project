@@ -30,21 +30,12 @@ class AuthController extends BaseController
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'unique_id'=>Str::uuid()->toString()
         ]);
-
+        auth()->login($user);
         $accessToken = $user->createToken('authToken')->accessToken;
-
         return response()->json([ 'user' => $user, 'access_token' => $accessToken], 200);
-        // $user = new User([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        //     'unique_id'=>Str::uuid()->toString()
-        // ]);
-        // $user->save();
-        // $token = $user->createToken('Personal Access Token')->accessToken;
-        // return $this->loginSuccess($token, $user);
     }
 
     public function login(Request $request)
@@ -61,13 +52,9 @@ class AuthController extends BaseController
             return $this->failure(401);
         }
 
-        $token = auth()->user()->createToken('authToken')->accessToken;
-        // if (!Auth::guard('api')->setUser(request(['email', 'password'])))
-        //     return $this->failure(401);
-
         $user = $request->user();
-        // $token = $user->createToken('Personal Access Token')->accessToken;
-        return $this->loginSuccess($token, $user);
+        $token = $user->createToken('authToken')->accessToken;
+        return response()->json([ 'user' => $user, 'access_token' => $token], 200);
     }
 
     public function user(Request $request)
@@ -79,13 +66,5 @@ class AuthController extends BaseController
     {
         $request->user()->token()->revoke();
         return $this->success('Successfully logged out');
-    }
-    protected function loginSuccess($token, $user)
-    {
-        return $this->success('Successfully logged in!', [
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user,
-        ]);
     }
 }

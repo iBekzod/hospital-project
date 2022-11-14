@@ -7,11 +7,18 @@ use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\ErrorResource;
 use App\Models\Appointment;
 use App\Models\Error;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends BaseController
 {
+    public function users()
+    {
+        // dd(\DB::table('users')->get());
+        return response()->json(['users'=>\DB::table('users')->get()]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,19 +27,19 @@ class AppointmentController extends BaseController
      */
     public function index(Request $request)
     {
-        // try {
-            $appointments=Appointment::get();
+        try {
+            $appointments=Appointment::query();
             if($participant=$request->participant){
                 $appointments=$appointments->where('participant', 'like', '%'.$participant.'%');
             }
             if($performer=$request->performer){
                 $appointments=$appointments->where('performer', 'like', '%'.$performer.'%');
             }
-            // $appointments=$appointments->get();
+            $appointments=$appointments->get();
             return AppointmentResource::collection($appointments);
-        // } catch (\Throwable $th) {
-        //     return $this->failure(502);
-        // }
+        } catch (\Throwable $th) {
+            return $this->failure(502);
+        }
     }
 
     /**
@@ -44,7 +51,7 @@ class AppointmentController extends BaseController
     public function store(Request $request)
     {
         try {
-
+            //left blank do later on
 
         } catch (\Throwable $th) {
             return $this->failure(502);
