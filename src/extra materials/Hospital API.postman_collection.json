@@ -1,0 +1,1239 @@
+{
+	"info": {
+		"_postman_id": "2bf6a6ff-d57f-4fd1-bac2-d78e8df19e6a",
+		"name": "Hospital API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10004081"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"    pm.collectionVariables.set('token', res.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{$randomUserName}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{$randomEmail}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/register",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "{{$randomUserName}}",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "{{$randomEmail}}",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 12:05:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"name\": \"Myah.Purdy73\",\n        \"email\": \"Frederik_Koss@hotmail.com\",\n        \"unique_id\": \"f99c2183-1170-4a7a-a50b-cc1505bfbd45\",\n        \"updated_at\": \"2022-11-14T12:05:02.000000Z\",\n        \"created_at\": \"2022-11-14T12:05:02.000000Z\",\n        \"id\": 2\n    },\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjcyMDk1NDBkYThmMTcxMTIzYjNhYzAxNTI2NWY4N2IzNjViYTFlZTMyYzY4OTc3ODJhZmNkMDRiNzBlYjk0NzkxYWMzNDJmYjk3OGU3YjIiLCJpYXQiOjE2Njg0Mjc1MDIuOTEyMjc3LCJuYmYiOjE2Njg0Mjc1MDIuOTEyMjgsImV4cCI6MTY5OTk2MzUwMi44NjgzMDEsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.WzIL6TQaoQzRWiIcMIQvNMhOZwfHUgAzf3WC7cCA3h0LX9z8Ne42UpeEJJ6pJhpSwDG5j4mJJPEFYnYxlSPnyU-8FdLO_lpALgHL_3x7U0xmWjhEVfoeePTuTBfkWdLP9ZD8YBOHaHUut0F_QCkYj83MCFADeo3LFeJE2-_sn0nyhCpeKHObK7zjf2vpWpb-VhnUHBJtxg98z4__BbeoYQnyhw_nqx3BCGEy8eyr0xqyqD5MJtzXdi_5CWgzZWdluVbdtaInElRh11Q-PnBTYmuW0gb0qh2_GA9WzkZLPh2PxDsuaCX4_-G-ht58ExMxB4pwxDgdW96CackkhH2cGiCpICej5Bm2mLqMWGD-m5S3cmWgt56hZno-lhTKBtzITR2VF5GZBs6_MmILW2LOfwPHEPjAnZyefz7MdSLT0_8GZyGkgvHcne8FJIekTCP8XAXZsAZ8zovq0W_0qFiR8otnZCnmkGHyHgnyh625dEjinahHccwYPqEbwQ6h64ufeT84HqmBdVq5lfyAKpB7ITcUadRqdRcb9Xvl0GckH779HOBEVvsA44Fhs2ZZoq5u_WvtqjMHL6Rg0bSjWO8r34NhpdVBe3VLqIoJ2sJBxkrLWbKCeEhePSFHYkPex4cA1rDhzojhQnjSPFMgDR6PWthrozQB8OCVkW0-uPouktw\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"    pm.collectionVariables.set('token', res.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "{{email}}",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 12:02:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 1,\n        \"unique_id\": \"f888ce4c-3406-46d3-95b0-fd38fc963b40\",\n        \"name\": \"Art47\",\n        \"email\": \"Mona_Rutherford70@gmail.com\",\n        \"email_verified_at\": null,\n        \"created_at\": \"2022-11-14T11:57:49.000000Z\",\n        \"updated_at\": \"2022-11-14T11:57:49.000000Z\"\n    },\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOTZlYjU3ZmM2YjBjZDBmZjAyOTI5ODRkMTQ1NTlhNGExZTFmOTliZjc5ZDcxNDc4NTBhMGFmMDBiMTFiYWVkNTEwMTQ5OWNiM2I2NjRkYjUiLCJpYXQiOjE2Njg0MjczNzguNjIxNjY5LCJuYmYiOjE2Njg0MjczNzguNjIxNjc1LCJleHAiOjE2OTk5NjMzNzguNDM0MTA0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.c1K5ErnOyU8BW4MAzb_LlknVflX6Zi_HBOjgmc4ZR5XppjNYssNl717HngWx6n_9sElOS1g3FrIuMSPSXLwyPY0Bw-a9n0qoqdFT90_uWJx3apUYf9alifUAOoEZMHslWajMpXiT1Ev2m5S_glkhssfzyWYCbLcOmP01QWq-3ICTN6STdf0FXRp79JV6rhU8zYTxg3SlYUV82mv_ky3g379QTd0tBz9iN8J3-KleOGNB6VnMBBZVqRWfYAzPfI4gU0bqLDiNKZas6GEW7Oamay7_mYEBoMj3pv_o1idEGF6OaGe3ytsuv31OOP4IDCxa6UqyRPsWNnrzjbsNDEvkMFSJfhI1C0zIVAqDR90sDgJGc1qXW7p5RBNSHY7quXe37S1B7XslsRGscMG3cA8MaJhO1TbLRHIfeu-aNyK-4t6XZNum_H4S5IzP9sfNIVBQfcSm63y5VNI3pelVW4-YkC7WS8NF0mlHLJz6Z2IVV1esxh6Hdrg7fdzIy4syS0BVA9mtEfSOS3vo_3PCNYE2yn_ZJAgb2ZfUm2oDSfDTD-RhmyjxwIvESWUq1upTaMrWO1Kx7MAoSJEQZuAv90LVHGVWi481FtJ8EuGGvzQ0Rud06XjvbMgbOd4kYPkBSVBQIHpaDBtm1R35WAy_3xKAvAaQ_o5ddiJRBgodZoxh0zo\"\n}"
+						}
+					]
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/user",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/user",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 12:05:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"unique_id\": \"f99c2183-1170-4a7a-a50b-cc1505bfbd45\",\n    \"name\": \"Myah.Purdy73\",\n    \"email\": \"Frederik_Koss@hotmail.com\",\n    \"email_verified_at\": null,\n    \"created_at\": \"2022-11-14T12:05:02.000000Z\",\n    \"updated_at\": \"2022-11-14T12:05:02.000000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/logout",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/logout",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 12:05:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Successfully logged out\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "create appointment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"    pm.collectionVariables.set('appointment_id', res[0].id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": [\r\n    {\r\n      \"use\": \"secondary\",\r\n      \"type\": \"RI\",\r\n      \"system\": \"http://some-company.uz\",\r\n      \"value\": \"84052\",\r\n      \"period\": {\r\n        \"start\": \"2022-05-18\",\r\n        \"end\": null\r\n      },\r\n      \"assigner\": \"SomeCompany LLC\"\r\n    }\r\n  ],\r\n  \"status\": \"proposed\",\r\n  \"participant\": [\r\n    {\r\n      \"actor\": {\r\n        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\r\n      }\r\n    },\r\n    {\r\n      \"actor\": {\r\n        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\r\n      }\r\n    }\r\n  ],\r\n  \"performer\": {\r\n    \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Appointment",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Appointment"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create appointment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": [\r\n    {\r\n      \"use\": \"secondary\",\r\n      \"type\": \"RI\",\r\n      \"system\": \"http://some-company.uz\",\r\n      \"value\": \"84052\",\r\n      \"period\": {\r\n        \"start\": \"2022-05-18\",\r\n        \"end\": null\r\n      },\r\n      \"assigner\": \"SomeCompany LLC\"\r\n    }\r\n  ],\r\n  \"status\": \"proposed\",\r\n  \"participant\": [\r\n    {\r\n      \"actor\": {\r\n        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\r\n      }\r\n    },\r\n    {\r\n      \"actor\": {\r\n        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\r\n      }\r\n    }\r\n  ],\r\n  \"performer\": {\r\n    \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Appointment",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Appointment"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 14:09:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"6780bf2e-b77d-4fc1-bcaf-04128267b33a\",\n        \"identifier\": {\n            \"use\": \"secondary\",\n            \"type\": \"RI\",\n            \"system\": \"http://some-company.uz\",\n            \"value\": \"db313b72-a4f2-45a9-8fb5-acc571801f1e\",\n            \"period\": {\n                \"start\": \"2022-05-18\",\n                \"end\": null\n            },\n            \"assigner\": \"SomeCompany LLC\"\n        },\n        \"status\": \"proposed\",\n        \"participant\": [\n            {\n                \"actor\": {\n                    \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                }\n            },\n            {\n                \"actor\": {\n                    \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                }\n            }\n        ],\n        \"performer\": {\n            \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "all appointments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"    pm.collectionVariables.set('appintment_id', res.data[0].id);\r",
+									"    pm.collectionVariables.set('participant', res.data[0].participant[0].actor.reference);\r",
+									"    pm.collectionVariables.set('performer', res.data[0].performer.reference);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Appointment",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Appointment"
+							],
+							"query": [
+								{
+									"key": "participant",
+									"value": "{{participant}}",
+									"disabled": true
+								},
+								{
+									"key": "performer",
+									"value": "{{performer}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all appointments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Appointment",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Appointment"
+									],
+									"query": [
+										{
+											"key": "participant",
+											"value": "{{participant}}",
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": "{{performer}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 14:23:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 6,\n    \"data\": [\n        {\n            \"id\": \"181c37be-d2ca-4f5a-856b-68e029539bfd\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"e3bffc09-3e43-46d4-9680-f314588867a0\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        },\n        {\n            \"id\": \"2ecb8e6b-9ee7-4e74-8051-48c1ac4f721b\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"7df295b6-7897-4365-9312-6d5d65433bea\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        },\n        {\n            \"id\": \"4d208528-f2ff-48a7-9120-3c7cc2012402\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"aa38edf5-49c3-40a7-b91e-0d9a704324ee\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        },\n        {\n            \"id\": \"6502e4a2-8af5-41a5-ad0e-c317e0dc460f\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"8a7a396c-0b92-4f7e-87ae-91ddb0785eba\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        },\n        {\n            \"id\": \"6780bf2e-b77d-4fc1-bcaf-04128267b33a\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"db313b72-a4f2-45a9-8fb5-acc571801f1e\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        },\n        {\n            \"id\": \"8943a09f-9bdd-45fe-948e-506f2b08bdaf\",\n            \"identifier\": {\n                \"use\": \"secondary\",\n                \"type\": \"RI\",\n                \"system\": \"http://some-company.uz\",\n                \"value\": \"468a844e-b18f-4b10-b4fb-a60f4a66e8c5\",\n                \"period\": {\n                    \"start\": \"2022-05-18\",\n                    \"end\": null\n                },\n                \"assigner\": \"SomeCompany LLC\"\n            },\n            \"status\": \"proposed\",\n            \"participant\": [\n                {\n                    \"actor\": {\n                        \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                    }\n                },\n                {\n                    \"actor\": {\n                        \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                    }\n                }\n            ],\n            \"performer\": {\n                \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "show appointment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"    pm.collectionVariables.set('participant', res.participant[0].actor.reference);\r",
+									"    pm.collectionVariables.set('performer', res.performer.reference);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/Appointment/{{appointment_id}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Appointment",
+								"{{appointment_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "show appointment",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/Appointment/{{appointment_id}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Appointment",
+										"{{appointment_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 14:21:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"6780bf2e-b77d-4fc1-bcaf-04128267b33a\",\n        \"identifier\": {\n            \"use\": \"secondary\",\n            \"type\": \"RI\",\n            \"system\": \"http://some-company.uz\",\n            \"value\": \"db313b72-a4f2-45a9-8fb5-acc571801f1e\",\n            \"period\": {\n                \"start\": \"2022-05-18\",\n                \"end\": null\n            },\n            \"assigner\": \"SomeCompany LLC\"\n        },\n        \"status\": \"proposed\",\n        \"participant\": [\n            {\n                \"actor\": {\n                    \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                }\n            },\n            {\n                \"actor\": {\n                    \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                }\n            }\n        ],\n        \"performer\": {\n            \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update appointment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var res = pm.response.json();\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Appointment\": [\r\n    {\r\n      \"op\": \"replace\",\r\n      \"patch\": \"/status\",\r\n      \"value\": \"arrived\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/Appointment/{{appointment_id}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"Appointment",
+								"{{appointment_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update appointment",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Appointment\": [\r\n    {\r\n      \"op\": \"replace\",\r\n      \"patch\": \"/status\",\r\n      \"value\": \"arrived\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/Appointment/{{appointment_id}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"Appointment",
+										"{{appointment_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 14 Nov 2022 16:00:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=120"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Vary",
+									"value": "Authorization"
+								},
+								{
+									"key": "Server",
+									"value": "Apache"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"6780bf2e-b77d-4fc1-bcaf-04128267b33a\",\n        \"identifier\": {\n            \"use\": \"secondary\",\n            \"type\": \"RI\",\n            \"system\": \"http://some-company.uz\",\n            \"value\": \"db313b72-a4f2-45a9-8fb5-acc571801f1e\",\n            \"period\": {\n                \"start\": \"2022-05-18\",\n                \"end\": null\n            },\n            \"assigner\": \"SomeCompany LLC\"\n        },\n        \"status\": \"arrived\",\n        \"participant\": [\n            {\n                \"actor\": {\n                    \"reference\": \"Practitioner/e84abf7e-13dc-11ed-a75f-d45d646bc9f2\"\n                }\n            },\n            {\n                \"actor\": {\n                    \"reference\": \"Patient/1bde98b0-13dd-11ed-9c13-d45d646bc9f2\"\n                }\n            }\n        ],\n        \"performer\": {\n            \"reference\": \"Organization/d3880af0-13c9-11ed-907a-d45d646bc9f2\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "all users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    var res = pm.response.json();\r",
+							"    pm.collectionVariables.set('email', res.users[0].email);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/users",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "participant",
+							"value": "{{participant}}",
+							"disabled": true
+						},
+						{
+							"key": "performer",
+							"value": "{{performer}}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "all users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "participant",
+									"value": "{{participant}}",
+									"disabled": true
+								},
+								{
+									"key": "performer",
+									"value": "{{performer}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 14 Nov 2022 14:43:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=120"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "Authorization"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"users\": [\n        {\n            \"id\": 1,\n            \"unique_id\": \"f888ce4c-3406-46d3-95b0-fd38fc963b40\",\n            \"name\": \"Art47\",\n            \"email\": \"Mona_Rutherford70@gmail.com\",\n            \"email_verified_at\": null,\n            \"password\": \"$2y$10$rJdPxkYdWx.YCA3qE/QZeOfWwl7p.kOvoOvr5zcDhcT3fzantzBqe\",\n            \"remember_token\": null,\n            \"created_at\": \"2022-11-14 11:57:49\",\n            \"updated_at\": \"2022-11-14 11:57:49\"\n        },\n        {\n            \"id\": 2,\n            \"unique_id\": \"f99c2183-1170-4a7a-a50b-cc1505bfbd45\",\n            \"name\": \"Myah.Purdy73\",\n            \"email\": \"Frederik_Koss@hotmail.com\",\n            \"email_verified_at\": null,\n            \"password\": \"$2y$10$i0nhDdrt1aSiuqYKOyF3xu9UN6FyLCU44b.EiiWw9kpJjW5ZNSbMe\",\n            \"remember_token\": null,\n            \"created_at\": \"2022-11-14 12:05:02\",\n            \"updated_at\": \"2022-11-14 12:05:02\"\n        },\n        {\n            \"id\": 3,\n            \"unique_id\": \"123f9b5a-1f07-4825-8af6-500a576e7b24\",\n            \"name\": \"Estefania0\",\n            \"email\": \"Ignatius_Kuphal55@hotmail.com\",\n            \"email_verified_at\": null,\n            \"password\": \"$2y$10$07/Ap6Dot0l4y2/CWuB1oOEkBJ5TVsbSL.QC86yfTq/WSLnRDNmPO\",\n            \"remember_token\": null,\n            \"created_at\": \"2022-11-14 14:06:00\",\n            \"updated_at\": \"2022-11-14 14:06:00\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseurl",
+			"value": "http://hospital.test/api",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "123456789",
+			"type": "string"
+		},
+		{
+			"key": "appointment_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "participant",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "performer",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "appintment_id",
+			"value": ""
+		}
+	]
+}
