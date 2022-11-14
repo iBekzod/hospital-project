@@ -18,7 +18,7 @@ class ErrorResource extends JsonResource
     {
         return abort(response()->json([
             'timestamp'=>Carbon::now(),
-            'description'=>$this->description,
+            'id'=>$this->id,
             'status'=>$this->status,
             'title'=>$this->title,
         ]), ((int)$this->status));

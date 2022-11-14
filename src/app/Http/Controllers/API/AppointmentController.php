@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class AppointmentController extends BaseController
@@ -40,7 +41,10 @@ class AppointmentController extends BaseController
                 $appointments=$appointments->where('performer', 'like', '%'.$performer.'%');
             }
             $appointments=$appointments->get();
-            return AppointmentResource::collection($appointments);
+            return response()->json([
+                'count'=>count($appointments),
+                'data'=>AppointmentResource::collection($appointments)
+            ]);
         } catch (\Throwable $th) {
             return $this->failure(502);
         }
@@ -80,9 +84,6 @@ class AppointmentController extends BaseController
             $appointment=Appointment::create($data);
         } catch (\Exception $e) {
             DB::rollback();
-            return response([
-                'error'=>$e->getMessage()
-            ]);
             return $this->failure(502);
         }
         DB::commit();
@@ -97,10 +98,12 @@ class AppointmentController extends BaseController
      */
     public function show($appointment)
     {
-
+        if(!is_string($appointment)){
+            return $this->failure(400);;
+        }
         try {
             if($appointment=Appointment::where('id', $appointment)->first()){
-                return new AppointmentResource($appointment);
+                return ["Appointment"=>new AppointmentResource($appointment)];
             }else{
                 return $this->failure(404);
             }
@@ -118,9 +121,12 @@ class AppointmentController extends BaseController
      */
     public function update(Request $request, $appointment)
     {
+        if(!is_string($appointment)){
+            return $this->failure(400);
+        }
         try {
             if($appointment=Appointment::where('id', $appointment)->first()){
-                if($data=$request["Appointment"]){
+                if($data=$request["Appointment"][0]){
                     switch ($data['op']) {
                         case 'replace':
                             $appointment->update([
@@ -132,12 +138,12 @@ class AppointmentController extends BaseController
                             break;
                     }
                 }
-                return new AppointmentResource($appointment);
+                return ["Appointment"=>new AppointmentResource($appointment)];
             }else{
                 return $this->failure(404);
             }
-        } catch (\Throwable $th) {
-            return $this->failure(502);
+        } catch (\Exception $e) {
+            return $this->failure(502, $e->getMessage(), $e->getTraceAsString());
         }
     }
 }

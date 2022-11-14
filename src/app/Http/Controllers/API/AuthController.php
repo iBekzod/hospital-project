@@ -46,7 +46,7 @@ class AuthController extends BaseController
             'password' => 'required|string'
         ]);
         if($validator->fails()){
-            return $this->failure(401);;
+            return $this->failure(400);;
         }
         if (!auth()->attempt($data)) {
             return $this->failure(401);
@@ -65,6 +65,6 @@ class AuthController extends BaseController
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-        return $this->success('Successfully logged out');
+        return response()->json(['message'=>'Successfully logged out']);
     }
 }

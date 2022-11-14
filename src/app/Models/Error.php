@@ -20,4 +20,6 @@ class Error extends Model
         'status',
         'title',
     ];
+
+    public $timestamps = false;
 }

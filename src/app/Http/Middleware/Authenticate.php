@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\ErrorResource;
 use App\Models\Error;
+use Carbon\Carbon;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -23,6 +24,12 @@ class Authenticate extends Middleware
 
     protected function unauthenticated($request, array $guards)
     {
-        return new ErrorResource(Error::where('status', 401)->first());
+        $error=Error::create([
+            'timestamp'=>Carbon::now(),
+            'description'=>null,
+            'status'=>401,
+            'title'=>"The resource owner or authorization server denied the request because access token is invalid.",
+        ]);
+        return new ErrorResource($error);
     }
 }
