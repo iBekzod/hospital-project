@@ -7,10 +7,14 @@ use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\ErrorResource;
 use App\Models\Appointment;
 use App\Models\Error;
+use App\Models\Identifier;
+use App\Models\Period;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AppointmentController extends BaseController
 {
@@ -50,12 +54,39 @@ class AppointmentController extends BaseController
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         try {
-            //left blank do later on
-
-        } catch (\Throwable $th) {
+            $period_id=Str::uuid()->toString();
+            $identifier_id=Str::uuid()->toString();
+            $data=$request->all();
+            $identifier=$data['identifier'];
+            $period=$identifier[0]['period'];
+            $identifier[0]['period']=$period_id;
+            $identifier[0]['value']=$identifier_id;
+            $data['identifier']=$identifier_id;
+            $participants=[];
+            foreach($data['participant'] as $participant){
+                $participants[]=$participant['actor']['reference'];
+            }
+            $data['participant']=implode(',', $participants);
+            $data['performer']=explode("/", $data['performer']['reference'])[1];
+            // dd($period);
+            $period=Period::create([
+                'id'=>$period_id,
+                'start'=>($period['start'])?Carbon::createFromFormat('Y-m-d', $period['start'])->toDateString():null,
+                'end'=>($period['end'])?Carbon::createFromFormat('Y-m-d', $period['end'])->toDateString():null
+            ]);
+            $identifier=Identifier::create($identifier[0]);
+            $appointment=Appointment::create($data);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response([
+                'error'=>$e->getMessage()
+            ]);
             return $this->failure(502);
         }
+        DB::commit();
+        return response()->json([new AppointmentResource($appointment)], 201);
     }
 
     /**

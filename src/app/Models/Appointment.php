@@ -24,13 +24,14 @@ class Appointment extends Model
         'participant',
         'performer',
     ];
+    public $timestamps = false;
 
     /**
      * Get the user that owns the comment.
      */
     public function identifierRelation()
     {
-        return $this->hasOne(Identifier::class, 'identifier', 'value');
+        return $this->hasOne(Identifier::class, 'value', 'identifier');
     }
 
 }

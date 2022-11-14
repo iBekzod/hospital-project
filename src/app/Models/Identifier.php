@@ -27,13 +27,14 @@ class Identifier extends Model
         'period',
         'assigner',
     ];
+    public $timestamps = false;
 
     /**
      * Get the user that owns the comment.
      */
     public function periodRelation()
     {
-        return $this->hasOne(Period::class, 'period', 'id');
+        return $this->hasOne(Period::class, 'id', 'period');
     }
 
 }

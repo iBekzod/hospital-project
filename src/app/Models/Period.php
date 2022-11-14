@@ -15,14 +15,16 @@ class Period extends Model
      * @var array<int, string>
      */
 
-    use UUID;
+    // use UUID;
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id',
         'start',
         'end'
     ];
+    public $timestamps = false;
 
     /**
      * Get the user that owns the comment.
