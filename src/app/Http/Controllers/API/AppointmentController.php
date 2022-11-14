@@ -129,9 +129,38 @@ class AppointmentController extends BaseController
                 if($data=$request["Appointment"][0]){
                     switch ($data['op']) {
                         case 'replace':
-                            $appointment->update([
-                                str_replace('/', '', $data['patch'])=>$data['value']
-                            ]);
+                            $is_valid=true;
+                            if(str_replace('/', '', $data['patch'])=='status'){
+                                $status=$data['value'];
+                                $is_valid=false;
+                                //'proposed', 'pending', 'booked', 'arrived', 'fulfilled', 'cancelled', 'noshow', 'entered-in-error', 'checked-in', 'waitlist'
+                                switch ($appointment->status) {
+                                    case 'booked':
+                                        $is_valid=($status=='arrived' || $status=='cancelled');
+                                        break;
+                                    case 'arrived':
+                                        $is_valid=($status=='fulfilled' || $status=='cancelled');
+                                        break;
+                                    case 'cancelled':
+                                        $is_valid=false;
+                                        break;
+                                    case 'fulfilled':
+                                        $is_valid=false;
+                                        break;
+
+                                    default:
+                                        $is_valid=false;
+                                        break;
+                                }
+
+                            }
+                            if($is_valid){
+                                $appointment->update([
+                                    str_replace('/', '', $data['patch'])=>$data['value']
+                                ]);
+                            }else{
+                                return $this->failure(400);
+                            }
                             break;
                         default:
                             return $this->failure(400);
