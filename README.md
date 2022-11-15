@@ -30,8 +30,8 @@ API for booking hospital services
 
  ## Run sample unit test
  ```
-    cd /src
-    ./vendor/bin/phpunit
+    $ cd /src
+    $ ./vendor/bin/phpunit
  ```
  [For more details](https://laravel.com/docs/9.x/testing#running-tests)
 
